@@ -13,6 +13,19 @@
 
 ## Quality project
 1. Quality project must be associated with a part - model
-2. Quality project must have customer
+2. Quality project must have customer - database - model
+3. Quality project must have a purchase order before an inspection plan can be made ???
+4. Quality project associated part (and children, if any) must have a drawing attached before an inspection plan can be made ???
+5. Quality project must have an inspection plan attached before it can be approved
+6. Quality project associated part (and children, if any) before the report can be approved
+7. Quality project must have an approved report before a record can be assembled
+8. if customer == "mctractor":
+  - Quality project must have a customer request before a record can be assembled
+9. Quality project must have an assembled record attached before it can be marked approved
+10. Quality project customer approval should automatically change to "ready" once an assembled record is approved
+
+
+
+
 
 !!!!!! BUG BUG BUG BUG !!!!!!!!
