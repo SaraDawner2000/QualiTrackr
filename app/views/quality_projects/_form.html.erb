@@ -12,26 +12,15 @@
 
   <div class="mb-3">
     <%= form.label :customer, "Customer", class: "form-label" %>
-    <% if form.object.new_record? %>
       <%= form.select :customer, [["Sparky", "sparky"], ["McTractor", "mctractor"]], { prompt: "Select Customer" }, { id: "customer_selector", class: "form-select" } %>
-    <% else %>
-      <%= form.text_field :customer, disabled: true, class: "form-control" %>
-    <% end %>
   </div>
 
-  <div id="mctractor_field" class="mb-3" style="display: none;">
+  <div id="mctractor_customer_request" class="mb-3" style="display: none;">
     <%= form.label :customer_request, class: "form-label" %>
     <%= form.text_field :customer_request, class: "form-control" %>
-    <%= form.hidden_field :customer, value: "mctractor" %>
   </div>
 
-  <div id="sparky_field" class="mb-3" style="display: none;">
-    <%= form.hidden_field :customer_request, value: "not_applicable", id: "sparky_customer_request" %>
-    <%= form.hidden_field :customer, value: "sparky", id: "sparky_customer_field" %>
-  </div>
-
-  <%= form.hidden_field :customer, value: "", id: "hidden_customer_field" %>
-  <%= form.hidden_field :customer_request, value: "", id: "hidden_customer_request_field" %>
+  <%= form.hidden_field :customer_request, value: "not_applicable", id: "sparky_customer_request" %>
 
   <div class="mb-3">
     <%= form.label :purchase_order, class: "form-label" %>
@@ -106,41 +95,22 @@
 <script>
   document.addEventListener("turbo:load", function() {
     const customerSelector = document.getElementById("customer_selector");
-    const mctractorField = document.getElementById("mctractor_field");
-    const sparkyField = document.getElementById("sparky_field");
+    const mctractorCustomerRequest = document.getElementById("mctractor_customer_request");
     const sparkyCustomerRequest = document.getElementById("sparky_customer_request");
-    const sparkyCustomerField = document.getElementById("sparky_customer_field");
-    const hiddenCustomerRequest = document.getElementById("hidden_customer_request_field");
-    const hiddenCustomerField = document.getElementById("hidden_customer_field");
 
     customerSelector.addEventListener("change", function() {
       const selectedValue = this.value;
 
       if (selectedValue === "mctractor") {
-        mctractorField.style.display = "block";
-        sparkyField.style.display = "none";
+        mctractorCustomerRequest.style.display = "block";
         sparkyCustomerRequest.removeAttribute("name");
-        sparkyCustomerField.removeAttribute("name");
-        hiddenCustomerRequest.removeAttribute("name");
-        hiddenCustomerField.removeAttribute("name");
-        document.querySelector('input[name="quality_project[customer]"]').value = "mctractor";
-        document.querySelector('input[name="quality_project[customer_request]"]').value = "";
+        
       } else if (selectedValue === "sparky") {
-        mctractorField.style.display = "none";
-        sparkyField.style.display = "block";
         sparkyCustomerRequest.setAttribute("name", "quality_project[customer_request]");
-        sparkyCustomerField.setAttribute("name", "quality_project[customer]");
-        hiddenCustomerRequest.removeAttribute("name");
-        hiddenCustomerField.removeAttribute("name");
-        document.querySelector('input[name="quality_project[customer]"]').value = "sparky";
-        document.querySelector('input[name="quality_project[customer_request]"]').value = "not_applicable";
+        mctractorCustomerRequest.style.display = "none";
       } else {
-        mctractorField.style.display = "none";
-        sparkyField.style.display = "none";
         sparkyCustomerRequest.removeAttribute("name");
-        sparkyCustomerField.removeAttribute("name");
-        document.querySelector('input[name="quality_project[customer]"]').value = "";
-        document.querySelector('input[name="quality_project[customer_request]"]').value = "";
+        mctractorCustomerRequest.style.display = "none";
       }
     });
   });
