@@ -15,6 +15,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :registrations, only: [:new, :create]
+  end
+
   get "/dashboard" => "dashboards#show", as: :dashboard
   get "dashboard/sort_parts", to: "dashboard#sort_parts", as: :sort_parts_dashboard
   get "dashboard/sort_quality_projects", to: "dashboard#sort_quality_projects", as: :sort_quality_projects_dashboard

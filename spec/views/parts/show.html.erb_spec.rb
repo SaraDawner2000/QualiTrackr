@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "parts/show", type: :view do
   before(:each) do
     assign(:part, Part.create!(
-      part_number: "Part Number",
+      number: "Part Number",
       revision: "Revision",
       job: "Job",
       drawing: "Drawing",

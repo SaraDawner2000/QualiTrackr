@@ -4,7 +4,7 @@ RSpec.describe "parts/index", type: :view do
   before(:each) do
     assign(:parts, [
       Part.create!(
-        part_number: "Part Number",
+        number: "Part Number",
         revision: "Revision",
         job: "Job",
         drawing: "Drawing",
@@ -13,7 +13,7 @@ RSpec.describe "parts/index", type: :view do
         measured_status: false
       ),
       Part.create!(
-        part_number: "Part Number",
+        number: "Part Number",
         revision: "Revision",
         job: "Job",
         drawing: "Drawing",

@@ -1,8 +1,8 @@
 class Part < ApplicationRecord
   has_one_attached :drawing
 
-  validates :part_number, uniqueness: { scope: :revision, message: "part number of this revision already exists." }
-  validates :part_number, :revision, presence: true
+  validates :number, uniqueness: { scope: :revision, message: "part number of this revision already exists." }
+  validates :number, :revision, presence: true
 
   has_one :quality_project, dependent: :destroy
 
@@ -26,7 +26,7 @@ class Part < ApplicationRecord
   scope :measured, -> { where(measured_status: true) }
 
   def self.ransackable_attributes(auth_object = nil)
-    ["part_number", "revision", "base_material", "finish", "measured_status"]
+    ["number", "revision", "base_material", "finish", "measured_status"]
   end
 
   def self.ransackable_associations(auth_object = nil)
