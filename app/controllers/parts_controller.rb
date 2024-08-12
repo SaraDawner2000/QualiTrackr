@@ -48,7 +48,7 @@ class PartsController < ApplicationController
   def create_children(parent_part, child_hash)
     child_hash.each do |key, child_params|
       delete_empty_params child_params
-      permitted_child_params = child_params.permit(:part_number, :revision, :drawing, :base_material, :finish)
+      permitted_child_params = child_params.permit(:number, :revision, :drawing, :base_material, :finish)
 
       child_part = Part.new(permitted_child_params)
       if child_part.save
@@ -97,7 +97,7 @@ class PartsController < ApplicationController
     def part_params
       part_params = params.require(:part)
       delete_empty_params part_params
-      part_params.permit(:part_number, :revision, :job, :drawing, :base_material, :finish, :measured_status)
+      part_params.permit(:number, :revision, :job, :drawing, :base_material, :finish, :measured_status)
     end
 
     def destroy_duds

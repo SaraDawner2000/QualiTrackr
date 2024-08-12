@@ -1,6 +1,8 @@
 class User < ApplicationRecord
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable # :confirmable
+  devise :database_authenticatable,
+         :recoverable, :rememberable, :validatable
 
-  enum roles: { quality_manager: "quality_manager", quality_admin: "quality_admin", qc_tech: "qc_tech", prod_manager: "prod_manager" }
+  validates :email, :password, :username, :role, presence: :true
+
+  enum role_options: { quality_manager: "quality_manager", quality_admin: "quality_admin", qc_tech: "qc_tech", prod_manager: "prod_manager" }
 end

@@ -15,36 +15,17 @@ unless Rails.env.production?
     desc "Add sample_data"
     task sample_data: [
       :environment,
-      "dev:add_users",
       "dev:add_parts",
       "dev:add_subcomponents",
       "dev:add_quality_projects"
      ] do
     end
 
-    desc "Add sample users"
-    task add_users: :environment do
-      User.roles.each do |key, role|
-        [false, true].each do |admin_option|
-          username = Faker::Internet.username(separators: %w(_))
-          User.create(
-            email: "#{username}@example.com",
-            password: "password",
-            username: "#{username}",
-            roles: role,
-            admin: admin_option
-          )
-        end
-      end
-
-      puts "#{User.count} users created"
-    end
-
     desc "Add sample parts"
     task add_parts: :environment do
       rand(80..160).times do
         part = Part.new
-        part.part_number = Faker::Number.number(digits: 8).to_s
+        part.number = Faker::Number.number(digits: 8).to_s
         part.revision = ["A", "B", "C", "D", "E"].sample
 
         if rand < 0.5

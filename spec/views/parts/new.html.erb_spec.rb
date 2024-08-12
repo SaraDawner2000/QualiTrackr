@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe "parts/new", type: :view do
   before(:each) do
     assign(:part, Part.new(
-      part_number: "MyString",
+      number: "MyString",
       revision: "MyString",
       job: "MyString",
       drawing: "MyString",
@@ -17,7 +17,7 @@ RSpec.describe "parts/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", parts_path, "post" do
-      assert_select "input[name=?]", "part[part_number]"
+      assert_select "input[name=?]", "part[number]"
 
       assert_select "input[name=?]", "part[revision]"
 

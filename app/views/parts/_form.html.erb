@@ -38,8 +38,8 @@
   <ul class="list-unstyled">
     <li class="mb-3">
       <div class="d-flex justify-content-between align-items-center">
-        <label for="child${childFieldCount}_part_number" class="form-label mb-0">Part number</label>
-        <input id="child${childFieldCount}_part_number" type="text" name="subcomponents[child${childFieldCount}][part_number]" class="form-control w-50">
+        <label for="child${childFieldCount}_number" class="form-label mb-0">Part number</label>
+        <input id="child${childFieldCount}_number" type="text" name="subcomponents[child${childFieldCount}][number]" class="form-control w-50">
       </div>
     </li>
     <li class="mb-3">
@@ -95,8 +95,8 @@
   <% end %>
 
   <div class="mb-3">
-    <%= form.label :part_number, class: "form-label" %>
-    <%= form.text_field :part_number, class: "form-control" %>
+    <%= form.label :number, class: "form-label" %>
+    <%= form.text_field :number, class: "form-control" %>
   </div>
 
   <div class="mb-3">
@@ -147,7 +147,7 @@
       <div id="child-fields-container">
         <% part.child_parts.each do |child| %>
           <div class="d-flex small mb-2">
-            <p class="mb-0">PN# <%= child.part_number %> Rev <%= child.revision %></p>
+            <p class="mb-0">PN# <%= child.number %> Rev <%= child.revision %></p>
           </div>
         <% end %>
       </div>
