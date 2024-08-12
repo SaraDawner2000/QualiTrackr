@@ -71,20 +71,11 @@ class QualityProjectsController < ApplicationController
   end
 
   def remove_inspection_plan
-    @quality_project.inspection_plan.purge
-    unless @quality_project.inspection_plan.attached?
-      redirect_to edit_quality_project_url(@quality_project), notice: "Drawing successfully removed"
-    else
-      redirect_to edit_quality_project_url(@quality_project), notice: "Failed to remove drawing"
-    end
+    purge_attachment(@quality_project, :inspection_plan, "inspection plan")
   end
+
   def remove_assembled_record
-    @quality_project.assembled_record.purge
-    unless @quality_project.assembled_record.attached?
-      redirect_to edit_quality_project_url(@quality_project), notice: "Drawing successfully removed"
-    else
-      redirect_to edit_quality_project_url(@quality_project), notice: "Failed to remove drawing"
-    end
+    purge_attachment(@quality_project, :assembled_record, "assembled record")
   end
 
   private

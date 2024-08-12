@@ -51,7 +51,7 @@
 
     <div class="mb-3">
       <h6>Assembled record</h6>
-      <% if quality_project.inspection_plan.attached? %>
+      <% if quality_project.assembled_record.attached? %>
         <div>
           <%= form.label "Approve record: ", class: "form-label" %>
           <%= form.check_box :record_approval, class: "form-check-input" %>
