@@ -9,7 +9,7 @@ User.create(
 )
 
 # Create the sample users
-users = ["Alice", "Bob", "Dave", "Eve"]
+users = ["Alice", "Bob", "Carol", "Dave"]
 index = 0
 User.role_options.each do |key, role|
     username = users[index].downcase
@@ -20,4 +20,5 @@ User.role_options.each do |key, role|
       role:,
       admin: false
     )
+    index += 1
   end

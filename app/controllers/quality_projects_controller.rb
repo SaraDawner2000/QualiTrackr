@@ -2,7 +2,7 @@ class QualityProjectsController < ApplicationController
   include Cleanable
 
   before_action :set_quality_project, only: %i[ show edit update destroy remove_assembled_record remove_inspection_plan]
-
+  before_action { authorize @quality_project || QualityProject }
   # GET /quality_projects or /quality_projects.json
   def index
     @quality_project_query = QualityProject.ransack(params[:q])
