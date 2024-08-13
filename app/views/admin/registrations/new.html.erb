@@ -1,5 +1,5 @@
 <div class="card" style="width: 100%; max-width: 400px; margin: auto; margin-top: 50px;">
-  <div class="card-header">
+  <div class="card-header d-flex justify-content-center align-items-center">
     <h5 class="card-title">Add New User</h5>
   </div>
   <div class="card-body">
@@ -14,8 +14,7 @@
       <%= f.text_field :username, class: "form-control" %>
       
       <%= f.label "Role:" %>
-       <%= f.select :role, options_for_select(User.role_options.keys.map { |role| [role.humanize, role] }), { class: "form-control" } %>
-
+      <%= f.select :role, User.role_options.keys.map { |role| [role.humanize, role] },{}, { class: "form-control"} %>
       <div class="form-actions text-end mt-3">
         <%= f.submit "Create User", class: "btn btn-primary" %>
       </div>
