@@ -54,8 +54,13 @@ namespace :slurp do
       quality_project.part_id = row["part_id"]
       quality_project.customer_request = row["customer_request"]
       quality_project.purchase_order = row["purchase_order"]
-      quality_project.report_approval = row["report_approval"] == "TRUE"
-      quality_project.record_approval = row["record_approval"] == "TRUE"
+
+      unless row["report_approval"]
+        quality_project.report_approval = row["report_approval"] == "TRUE"
+      end
+      unless row["record_approval"]
+        quality_project.record_approval = row["record_approval"] == "TRUE"
+      end
 
       if row["inspection_plan"] == "TRUE"
         quality_project.inspection_plan.attach(
