@@ -51,7 +51,7 @@
 
     <div class="mb-3">
       <h6>Assembled record</h6>
-      <% if quality_project.inspection_plan.attached? %>
+      <% if quality_project.assembled_record.attached? %>
         <div>
           <%= form.label "Approve record: ", class: "form-label" %>
           <%= form.check_box :record_approval, class: "form-check-input" %>
@@ -72,7 +72,7 @@
  
     <div class="mb-3">
       <%= form.label :customer_approval, class: "form-label" %>
-      <%= form.select :approval_option, QualityProject.customer_options.map { |status| status }, {}, { class: "form-select" } %>
+      <%= form.select :approval_option, QualityProject.customer_options.map { |status| status }, {prompt: "Set status"}, { class: "form-select" } %>
     </div>
   <% end %>
 
@@ -91,28 +91,3 @@
   </div>
 <% end %>
 
-<script>
-function attachCustomerRequestListeners() {
-  const customerSelector = document.getElementById("customer_selector");
-  const mctractorCustomerRequest = document.getElementById("mctractor_customer_request");
-  const sparkyCustomerRequest = document.getElementById("sparky_customer_request");
-
-  if (customerSelector) {
-    customerSelector.addEventListener("change", function() {
-      const selectedValue = this.value;
-      if (selectedValue === "mctractor") {
-        mctractorCustomerRequest.style.display = "block";
-        sparkyCustomerRequest.removeAttribute("name");
-      } else if (selectedValue === "sparky") {
-        sparkyCustomerRequest.setAttribute("name", "quality_project[customer_request]");
-        mctractorCustomerRequest.style.display = "none";
-      } else {
-        sparkyCustomerRequest.removeAttribute("name");
-        mctractorCustomerRequest.style.display = "none";
-      }
-    });
-  }
-}
-
-document.addEventListener("turbo:render", attachCustomerRequestListeners);
-</script>

@@ -10,8 +10,12 @@
 <% else %>
     <td><%= quality_project.customer_request %></td>
 <% end %>
+<% if quality_project.purchase_order %>
+  <td><%= quality_project.purchase_order %></td>
+<% else %>
+    <td class="text-danger">PO# required</td>
+<% end %>
 
-<td><%= quality_project.purchase_order %></td>
 
 <% if quality_project.report_approval == nil %>
 <td>Not available</td>
@@ -30,7 +34,7 @@
 <% end %>
 
 <% case quality_project.customer_approval %>
-<% when "unready" %>
+<% when nil %>
     <td>Not ready</td>
 <% when "ready" %>
     <td>Ready for customer</td>

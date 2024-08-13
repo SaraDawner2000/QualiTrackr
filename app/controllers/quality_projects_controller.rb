@@ -2,7 +2,7 @@ class QualityProjectsController < ApplicationController
   include Cleanable
 
   before_action :set_quality_project, only: %i[ show edit update destroy remove_assembled_record remove_inspection_plan]
-
+  before_action { authorize @quality_project || QualityProject }
   # GET /quality_projects or /quality_projects.json
   def index
     @quality_project_query = QualityProject.ransack(params[:q])
@@ -49,8 +49,14 @@ class QualityProjectsController < ApplicationController
 
   # PATCH/PUT /quality_projects/1 or /quality_projects/1.json
   def update
+    debugger
     respond_to do |format|
       if @quality_project.update(quality_project_params)
+        if @quality_project.record_approval
+          @quality_project.customer_approval = "ready"
+          @quality_project.save
+        end
+
         format.html { redirect_to quality_project_url(@quality_project), notice: "Quality project was successfully updated." }
         format.json { render :show, status: :ok, location: @quality_project }
       else
@@ -71,20 +77,11 @@ class QualityProjectsController < ApplicationController
   end
 
   def remove_inspection_plan
-    @quality_project.inspection_plan.purge
-    unless @quality_project.inspection_plan.attached?
-      redirect_to edit_quality_project_url(@quality_project), notice: "Drawing successfully removed"
-    else
-      redirect_to edit_quality_project_url(@quality_project), notice: "Failed to remove drawing"
-    end
+    purge_attachment(@quality_project, :inspection_plan, "inspection plan")
   end
+
   def remove_assembled_record
-    @quality_project.assembled_record.purge
-    unless @quality_project.assembled_record.attached?
-      redirect_to edit_quality_project_url(@quality_project), notice: "Drawing successfully removed"
-    else
-      redirect_to edit_quality_project_url(@quality_project), notice: "Failed to remove drawing"
-    end
+    purge_attachment(@quality_project, :assembled_record, "assembled record")
   end
 
   private
@@ -97,6 +94,6 @@ class QualityProjectsController < ApplicationController
     def quality_project_params
       quality_project_params = params.require(:quality_project)
       delete_empty_params quality_project_params
-      quality_project_params.permit(:part_id, :customer, :customer_request, :purchase_order, :inspection_plan, :report_approval, :assembled_record, :customer_approval)
+      quality_project_params.permit(:part_id, :customer, :customer_request, :purchase_order, :inspection_plan, :report_approval, :assembled_record, :record_approval, :customer_approval)
     end
 end

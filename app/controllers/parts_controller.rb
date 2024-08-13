@@ -1,8 +1,8 @@
 class PartsController < ApplicationController
   include Cleanable
-
   before_action :set_part, only: %i[ show edit update destroy remove_drawing]
   before_action :destroy_duds, only: %i[ index ]
+  before_action { authorize @part || Part }
   # GET /parts or /parts.json
   def index
     @part_query = Part.ransack(params[:q])
@@ -10,12 +10,7 @@ class PartsController < ApplicationController
   end
 
   def remove_drawing
-    @part.drawing.purge
-    unless @part.drawing.attached?
-      redirect_to edit_part_path(@part), notice: "Drawing successfully removed"
-    else
-      redirect_to edit_part_path(@part), notice: "Failed to remove drawing"
-    end
+    purge_attachment(@part, :drawing, "drawing")
   end
 
   # GET /parts/new

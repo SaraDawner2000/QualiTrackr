@@ -2,37 +2,32 @@
     <thead>
         <tr>
           <th scope="col">
-              <%= sort_link(@part_query, :quality_project_id, "Quality project") %>
+              Quality project
           </th> 
           <th scope="col">
-              <%= sort_link(@part_query, :quality_project_customer, "Customer") %>
+             Customer
           </th>            
           <th scope="col">
-              <%= sort_link(@part_query, :number, "Part number") %>
+              Part number
           </th>
           <th scope="col">
-              <%= sort_link(@part_query, :revision, "Part revision") %>
+              Part revision
           </th>
           <th scope="col">
-              <%= sort_link(@part_query, :base_material, "Base material") %>
+              Base material
           </th>
           <th scope="col">
-              <%= sort_link(@part_query, :finish, "Finish") %>
+              Finish
           </th>
           <th scope="col">
-              <%= sort_link(@part_query, :measured_status, "Measured") %>
+              Measured?
           </th>
         </tr>
     </thead>
-    <% parts.top_parts.each do |part| %>
+
+    <% parts.each do |part| %>
         <tbody>
             <%= render "parts/table_field", part: part %>
-
-            <% unless part.children.empty? %>
-                <% part.child_parts.each do |child| %>
-                    <%= render "parts/child_field", part: child %>
-                <% end %>
-            <% end %>
         </tbody>
     <% end %>
 </table>

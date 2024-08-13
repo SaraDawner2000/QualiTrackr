@@ -1,0 +1,15 @@
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link" id="nav-need-inspection-plan-tab" data-bs-toggle="tab" data-bs-target="#nav-need-inspection-plan" type="button" role="tab" aria-controls="nav-need-inspection-plan" aria-selected="true">Create inspection plan</button>
+    <button class="nav-link" id="nav-record-assembly-tab" data-bs-toggle="tab" data-bs-target="#nav-record-assembly" type="button" role="tab" aria-controls="nav-record-assembly" aria-selected="false">Assemble record</button>
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane show active" id="nav-need-inspection-plan" role="tabpanel" aria-labelledby="nav-need-inspection-plan-tab" tabindex="0">
+    <%= render "need_inspection_plan" %>
+  </div>
+  <div class="tab-pane" id="nav-record-assembly" role="tabpanel" aria-labelledby="nav-record-assembly-tab" tabindex="0">
+    <%= render "record_assembly" %>
+  </div>
+</div>

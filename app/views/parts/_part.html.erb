@@ -53,6 +53,22 @@
               <dd class="col-sm-5 text-success">Measured</dd>
             <% end %>
           </dl>
+          <% if part.parent_parts != [] %>
+            <h5>Parents: </h5>
+            <ul>
+              <% part.parent_parts.each do |parent| %>
+                <li><%= link_to "PN# #{parent.number} Rev #{parent.revision}", part_path(parent) %></li>
+              <% end %>
+            </ul>
+          <% elsif part.child_parts != [] %>
+            <h5>Children: </h5>
+            <ul>
+              <% part.child_parts.each do |child| %>
+                <li><%= link_to "PN# #{child.number} Rev #{child.revision}", part_path(child) %></li>
+              <% end %>
+            </ul>
+          <% end %>
+
         </div>
         <div class="card-footer text-muted d-flex flex-wrap align-items-center justify-content-center">
           <%= link_to "Edit this part", edit_part_path(part), class: "btn btn-warning m-2" %>
@@ -63,12 +79,3 @@
     </div>
   </div>
 </div>
-
-<style>
-  .card-body dl.row > dt,
-  .card-body dl.row > dd {
-    display: flex;
-    align-items: center;
-    height:30px; /* Adjust this value as needed */
-  }
-</style>

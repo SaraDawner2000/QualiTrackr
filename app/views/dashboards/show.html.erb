@@ -1,9 +1,28 @@
 <div class="container">
   <div class="d-flex justify-content-between align-items-center my-4">
   <h1 class="display-3 mt-4">Dashboard</h1>
-  <%= link_to "Add new user", new_admin_registration_path, class: "btn btn-success" %>
-  <%= link_to "Add new quality project", new_part_path, class: "btn btn-primary"%>
+  <div>
+    <% if current_user.admin? %>
+      <%= link_to "Add new user", new_admin_registration_path, class: "btn btn-success" %>
+    <% end %>
+    <% if ["quality_manager", "prod_manager"].include?(current_user.role) %>
+      <%= link_to "Add new quality project", new_part_path, class: "btn btn-primary" %>
+    <% end %>
   </div>
-  <%= render "tasks_summary" %>
-  <%= render "dashboard_tab_nav" %>
+  
+  </div>
+  <% case current_user.role %>
+  <% when "quality_manager" %>
+    <%= render "dashboards/task_summaries/quality_manager_tasks" %>
+    <%= render "dashboards/tab_navs/quality_manager_tab_nav" %>
+  <% when "quality_admin" %>
+    <%= render "dashboards/task_summaries/quality_admin_tasks" %>
+    <%= render "dashboards/tab_navs/quality_admin_tab_nav" %>
+  <% when "qc_tech" %>
+    <%= render "dashboards/task_summaries/qc_tech_tasks" %>
+    <%= render "dashboards/tab_navs/qc_tech_tab_nav" %>
+  <% when "prod_manager" %>
+    <%= render "dashboards/task_summaries/prod_manager_tasks" %>
+    <%= render "dashboards/tab_navs/prod_manager_tab_nav" %>
+  <% end %>
 </div>

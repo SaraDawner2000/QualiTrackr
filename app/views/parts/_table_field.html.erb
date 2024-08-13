@@ -1,6 +1,11 @@
 <tr>
+    <% if part.quality_project %>
     <td><%= link_to part.quality_project.id, quality_project_path(part.quality_project) %></td>
     <td><%= part.quality_project.customer %></td>
+    <% else %>
+    <td>subcomponent</td>
+    <td></td>
+    <% end %>
     <td><%= link_to part.number, part_path(part) %></td>
     <td><%= part.revision %></td>
     <td><%= part.base_material %></td>
