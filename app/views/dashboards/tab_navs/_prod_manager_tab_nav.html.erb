@@ -1,0 +1,23 @@
+<nav>
+  <div class="nav nav-tabs" id="nav-tab" role="tablist">
+    <button class="nav-link active" id="nav-not-sold-tab" data-bs-toggle="tab" data-bs-target="#nav-not-sold" type="button" role="tab" aria-controls="nav-not-sold" aria-selected="true">Add PO#</button>
+    <button class="nav-link" id="nav-report-approval-tab" data-bs-toggle="tab" data-bs-target="#nav-report-approval" type="button" role="tab" aria-controls="nav-report-approval" aria-selected="false">Approve report</button>
+    <button class="nav-link" id="nav-record-approval-tab" data-bs-toggle="tab" data-bs-target="#nav-record-approval" type="button" role="tab" aria-controls="nav-record-approval" aria-selected="false">Approve record</button>
+    <button class="nav-link" id="nav-customer-approval-tab" data-bs-toggle="tab" data-bs-target="#nav-customer-approval" type="button" role="tab" aria-controls="nav-customer-approval" aria-selected="false">Customer approval</button>
+  </div>
+</nav>
+
+<div class="tab-content" id="nav-tabContent">
+  <div class="tab-pane show active" id="nav-not-sold" role="tabpanel" aria-labelledby="nav-not-sold-tab" tabindex="0">
+    <%= render "not_sold" %>
+  </div>
+  <div class="tab-pane" id="nav-report-approval" role="tabpanel" aria-labelledby="nav-report-approval-tab" tabindex="0">
+    <%= render "report_approval" %>
+  </div>
+  <div class="tab-pane" id="nav-record-approval" role="tabpanel" aria-labelledby="nav-record-approval-tab" tabindex="0">
+    <%= render "record_approval" %>
+  </div>
+  <div class="tab-pane" id="nav-customer-approval" role="tabpanel" aria-labelledby="nav-customer-approval-tab" tabindex="0">
+    <%= render "customer_approval" %>
+  </div>
+</div>

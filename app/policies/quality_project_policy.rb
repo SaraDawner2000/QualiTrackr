@@ -23,14 +23,14 @@ class QualityProjectPolicy < ApplicationPolicy
   end
 
   def update?
-    current_user.role in ["quality_manager", "prod_manager", "quality_admin"]
+    true
   end
 
   def create?
-    current_user.role in ["quality_manager", "prod_manager"]
+    ["quality_manager", "prod_manager"].include?(current_user.role)
   end
 
   def destroy?
-    current_user.role in ["quality_manager", "prod_manager"]
+    ["quality_manager", "prod_manager"].include?(current_user.role)
   end
 end

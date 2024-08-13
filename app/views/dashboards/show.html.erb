@@ -5,12 +5,24 @@
     <% if current_user.admin? %>
       <%= link_to "Add new user", new_admin_registration_path, class: "btn btn-success" %>
     <% end %>
-    <% if current_user.role in ["quality_manager", "prod_manager"] %>
+    <% if ["quality_manager", "prod_manager"].include?(current_user.role) %>
       <%= link_to "Add new quality project", new_part_path, class: "btn btn-primary" %>
     <% end %>
   </div>
   
   </div>
-  <%= render "tasks_summary" %>
-  <%= render "dashboard_tab_nav" %>
+  <% case current_user.role %>
+  <% when "quality_manager" %>
+    <%= render "dashboards/task_summaries/quality_manager_tasks" %>
+    <%= render "dashboards/tab_navs/quality_manager_tab_nav" %>
+  <% when "quality_admin" %>
+    <%= render "dashboards/task_summaries/quality_admin_tasks" %>
+    <%= render "dashboards/tab_navs/quality_admin_tab_nav" %>
+  <% when "qc_tech" %>
+    <%= render "dashboards/task_summaries/qc_tech_tasks" %>
+    <%= render "dashboards/tab_navs/qc_tech_tab_nav" %>
+  <% when "prod_manager" %>
+    <%= render "dashboards/task_summaries/prod_manager_tasks" %>
+    <%= render "dashboards/tab_navs/prod_manager_tab_nav" %>
+  <% end %>
 </div>
