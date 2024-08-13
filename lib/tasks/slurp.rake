@@ -1,6 +1,6 @@
 namespace :slurp do
   desc "Clear database"
-  task destroy_data: :environment do
+  task reset: :environment do
     QualityProject.destroy_all
     Subcomponent.destroy_all
     Part.destroy_all
