@@ -24,15 +24,9 @@
           </th>
         </tr>
     </thead>
-    <% parts.top_parts.each do |part| %>
+    <% parts.each do |part| %>
         <tbody>
             <%= render "parts/table_field", part: part %>
-
-            <% unless part.children.empty? %>
-                <% part.child_parts.each do |child| %>
-                    <%= render "parts/child_field", part: child %>
-                <% end %>
-            <% end %>
         </tbody>
     <% end %>
 </table>
