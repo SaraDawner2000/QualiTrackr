@@ -64,7 +64,7 @@ namespace :slurp do
         quality_project.report_approval = false
       end
 
-      case row["report_approval"]
+      case row["record_approval"]
       when nil
         quality_project.record_approval = nil
       when "TRUE"
