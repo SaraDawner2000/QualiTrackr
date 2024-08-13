@@ -49,7 +49,6 @@ class QualityProjectsController < ApplicationController
 
   # PATCH/PUT /quality_projects/1 or /quality_projects/1.json
   def update
-    debugger
     respond_to do |format|
       if @quality_project.update(quality_project_params)
         if @quality_project.record_approval
