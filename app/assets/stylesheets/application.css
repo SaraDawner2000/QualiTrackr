@@ -13,6 +13,7 @@
  *= require_tree .
  *= require_self
  */
+ 
 a {
     text-decoration: none;
     color: black;
@@ -33,7 +34,7 @@ a {
   }
 
   .card-background {
-    background-image: url('<%= @image_path %>');
+    background-image: url("/assets/hardhat.jpg");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -44,5 +45,5 @@ a {
   .card-body dl.row > dd {
     display: flex;
     align-items: center;
-    height: 30px; /* Adjust this value as needed */
+    height: 30px; 
   }

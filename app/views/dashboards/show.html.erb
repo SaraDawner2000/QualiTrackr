@@ -5,7 +5,9 @@
     <% if current_user.admin? %>
       <%= link_to "Add new user", new_admin_registration_path, class: "btn btn-success" %>
     <% end %>
-    <%= link_to "Add new quality project", new_part_path, class: "btn btn-primary" %>
+    <% if current_user.role in ["quality_manager", "prod_manager"] %>
+      <%= link_to "Add new quality project", new_part_path, class: "btn btn-primary" %>
+    <% end %>
   </div>
   
   </div>

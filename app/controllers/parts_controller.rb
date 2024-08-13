@@ -1,8 +1,8 @@
 class PartsController < ApplicationController
   include Cleanable
-
   before_action :set_part, only: %i[ show edit update destroy remove_drawing]
   before_action :destroy_duds, only: %i[ index ]
+  before_action { authorize @part || Part }
   # GET /parts or /parts.json
   def index
     @part_query = Part.ransack(params[:q])
