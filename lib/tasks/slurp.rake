@@ -62,12 +62,22 @@ namespace :slurp do
       quality_project.customer_request = row["customer_request"]
       quality_project.purchase_order = row["purchase_order"]
 
-      unless row["report_approval"]
-        quality_project.report_approval = row["report_approval"] == "TRUE"
+      case row["report_approval"]
+      when nil
+        quality_project.report_approval = nil
+      when "TRUE"
+        quality_project.report_approval = true
+      when "FALSE"
+        quality_project.report_approval = false
       end
 
-      unless row["record_approval"]
-        quality_project.record_approval = row["record_approval"] == "TRUE"
+      case row["record_approval"]
+      when nil
+        quality_project.record_approval = nil
+      when "TRUE"
+        quality_project.record_approval = true
+      when "FALSE"
+        quality_project.record_approval = false
       end
 
       if row["inspection_plan"] == "TRUE"
