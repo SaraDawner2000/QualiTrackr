@@ -14,38 +14,6 @@
 
     <% @image_path = asset_path('hardhat.jpg') %>
 
-    <style>
-      .mask-custom {
-        backdrop-filter: blur(3px);
-        background-color: rgba(0,0,0,0.7);
-      }
-      .nav.nav-pills .nav-link{
-          color: #f8f9fa; /* Bootstrap light background color */
-      }
-      .nav.nav-pills .nav-link.active {
-          background-color: #f8f9fa; /* Bootstrap light background color */
-          color: #212529; /* Bootstrap dark text color */
-      }
-      .display-1 {
-        font-size: 10rem;
-      }
-
-      .card-background {
-        background-image: url('<%= @image_path %>');
-        background-size: cover;
-        background-position: center;
-        background-repeat: no-repeat;
-        height: 500px;
-        
-      }
-      .card-body dl.row > dt,
-      .card-body dl.row > dd {
-        display: flex;
-        align-items: center;
-        height: 30px; /* Adjust this value as needed */
-      }
-    </style>
-
   </head>
 
   <body>
@@ -61,7 +29,8 @@
     
     <%= yield %>
   </body>
-  <!--<footer>
+  <br>
+  <footer>
     <a href="https://www.flaticon.com/free-icons/pdf" title="pdf icons">Icons created by Freepik - Flaticon</a>
-  </footer>-->
+  </footer>
 </html>
