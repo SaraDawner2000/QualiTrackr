@@ -1,4 +1,11 @@
 namespace :slurp do
+  desc "Clear database"
+  task destroy_data: :environment do
+    QualityProject.destroy_all
+    Subcomponent.destroy_all
+    Part.destroy_all
+  end
+
   desc "Add parts from CSV"
   task parts: :environment do
     require "csv"
@@ -55,22 +62,12 @@ namespace :slurp do
       quality_project.customer_request = row["customer_request"]
       quality_project.purchase_order = row["purchase_order"]
 
-      case row["report_approval"]
-      when nil
-        quality_project.report_approval = nil
-      when "TRUE"
-        quality_project.report_approval = true
-      when "FALSE"
-        quality_project.report_approval = false
+      unless row["report_approval"]
+        quality_project.report_approval = row["report_approval"] == "TRUE"
       end
 
-      case row["record_approval"]
-      when nil
-        quality_project.record_approval = nil
-      when "TRUE"
-        quality_project.record_approval = true
-      when "FALSE"
-        quality_project.record_approval = false
+      unless row["record_approval"]
+        quality_project.record_approval = row["record_approval"] == "TRUE"
       end
 
       if row["inspection_plan"] == "TRUE"
