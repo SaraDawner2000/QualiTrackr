@@ -72,7 +72,7 @@
  
     <div class="mb-3">
       <%= form.label :customer_approval, class: "form-label" %>
-      <%= form.select :approval_option, QualityProject.customer_options.map { |status| status }, {}, { class: "form-select" } %>
+      <%= form.select :approval_option, QualityProject.customer_options.map { |status| status }, {prompt: "Set status"}, { class: "form-select" } %>
     </div>
   <% end %>
 

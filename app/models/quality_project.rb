@@ -1,7 +1,7 @@
 class QualityProject < ApplicationRecord
   has_one_attached :inspection_plan
   has_one_attached :assembled_record
-  enum customer_options: { unready: "unready", ready: "ready", sent: "sent", approved: "approved", rejected: "rejected" }
+  enum customer_options: { ready: "ready", sent: "sent", approved: "approved", rejected: "rejected" }
   enum customers: { sparky: "sparky", mctracktor: "mctracktor" }
   validates :customer, presence: true
 
