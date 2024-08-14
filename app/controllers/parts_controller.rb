@@ -3,7 +3,7 @@ class PartsController < ApplicationController
   before_action :set_part, only: %i[ show edit update destroy remove_drawing]
   before_action :destroy_duds, only: %i[ index ]
   before_action { authorize @part || Part }
-  # GET /parts or /parts.json
+
   def index
     @part_query = Part.ransack(params[:q])
     @parts = @part_query.result.page(params[:page])
@@ -13,16 +13,15 @@ class PartsController < ApplicationController
     purge_attachment(@part, :drawing, "drawing")
   end
 
-  # GET /parts/new
   def new
     @part = Part.new
   end
 
-  # GET /parts/1/edit
+
   def edit
   end
 
-  # POST /parts or /parts.json
+
   def create
     @part = Part.new(part_params)
     respond_to do |format|
@@ -55,7 +54,7 @@ class PartsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /parts/1 or /parts/1.json
+
   def update
     child_hash = params[:subcomponents]
     if child_hash
@@ -72,7 +71,7 @@ class PartsController < ApplicationController
     end
   end
 
-  # DELETE /parts/1 or /parts/1.json
+
   def destroy
     @part.destroy
 
@@ -83,7 +82,6 @@ class PartsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_part
       @part = Part.find(params[:id])
     end
@@ -91,10 +89,11 @@ class PartsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def part_params
       part_params = params.require(:part)
-      delete_empty_params part_params
+      delete_empty_params part_params # ensure that the empty strings submitted by the form are converted to nil
       part_params.permit(:number, :revision, :job, :drawing, :base_material, :finish, :measured_status)
     end
 
+    # destroy top parts that do not have associated quality projects (created if interrupted midway during new project creation)
     def destroy_duds
       Part.top_parts.each do |part|
         unless part.quality_project
