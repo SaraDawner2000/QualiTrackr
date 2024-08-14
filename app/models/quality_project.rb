@@ -1,20 +1,30 @@
+# == Schema Information
+#
+# Table name: quality_projects
+#
+#  id                :bigint           not null, primary key
+#  part_id           :bigint           not null
+#  customer_request  :string
+#  purchase_order    :string
+#  report_approval   :boolean
+#  record_approval   :boolean
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  customer_approval :enum
+#  customer          :enum             not null
+#
 class QualityProject < ApplicationRecord
-  has_one_attached :inspection_plan
-  has_one_attached :assembled_record
   enum customer_options: { ready: "ready", sent: "sent", approved: "approved", rejected: "rejected" }
   enum customers: { sparky: "sparky", mctracktor: "mctracktor" }
+
   validates :customer, presence: true
+
+  has_one_attached :inspection_plan
+  has_one_attached :assembled_record
 
   belongs_to :part
 
-  def self.ransackable_attributes(auth_object = nil)
-    [  "id", "customer", "number", "part_revision", "customer_request", "purchase_order", "report_approval", "record_approval", "customer_approval"]
-  end
-
-  def self.ransackable_associations(auth_object = nil)
-    ["part"]
-  end
-
+  # these scopes are required to filter the view partials for the dashboard
   scope :not_sold, -> { where(purchase_order: nil) }
   scope :sold, -> { where.not(purchase_order: nil) }
 
@@ -34,4 +44,12 @@ class QualityProject < ApplicationRecord
   scope :record_approved, -> { where(record_approval: true) }
 
   scope :with_customer_request, -> { where.not(customer_request: nil) }
+
+  def self.ransackable_attributes(auth_object = nil)
+    [  "id", "customer", "number", "part_revision", "customer_request", "purchase_order", "report_approval", "record_approval", "customer_approval"]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["part"]
+  end
 end

@@ -62,7 +62,7 @@
         </div>
         <div class="d-flex align-items-center justify-content-between mt-3">
           <%= form.label "Remove assembled record:", class: "form-label" %>
-          <%= link_to "remove", remove_inspection_plan_quality_project_path(quality_project), class: 'btn btn-danger mt-2' %>
+          <%= link_to "remove", remove_assembled_record_quality_project_path(quality_project), class: 'btn btn-danger mt-2' %>
         </div>
       <% else %>
         <%= form.label :assembled_record, "Add assembled record:", class: "form-label" %>

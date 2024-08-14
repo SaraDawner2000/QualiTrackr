@@ -42,6 +42,7 @@ group :development do
   gem "faker"
   gem "pry-rails"
   gem "rails_db"
+  gem "rails-erd"
   gem "rubocop-rails", require: false
   gem "rubocop-rails_config"
   gem "specs_to_readme"
