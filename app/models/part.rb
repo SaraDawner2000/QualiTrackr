@@ -1,8 +1,22 @@
+# == Schema Information
+#
+# Table name: parts
+#
+#  id              :bigint           not null, primary key
+#  number          :string           not null
+#  revision        :string           not null
+#  job             :string
+#  base_material   :string
+#  finish          :string
+#  measured_status :boolean          default(FALSE), not null
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
 class Part < ApplicationRecord
-  has_one_attached :drawing
-
   validates :number, uniqueness: { scope: :revision, message: "part number of this revision already exists." }
   validates :number, :revision, presence: true
+
+  has_one_attached :drawing
 
   has_one :quality_project, dependent: :destroy
 
@@ -12,6 +26,7 @@ class Part < ApplicationRecord
   has_many :child_parts, through: :children, source: :child, dependent: :destroy
   has_many :parent_parts, through: :parents, source: :parent
 
+  # these scopes are requried to differentiate top parts (parts with associated quality projects) from subcomponents (parts with associated top parts)
   scope :top_parts, -> { where.not(id: Subcomponent.pluck(:child_id).uniq) }
   scope :top_parts_with_subcomponents, -> { where(base_material: "subcomponent") }
   scope :subcomponents, -> { where(id: Subcomponent.pluck(:child_id).uniq) }
