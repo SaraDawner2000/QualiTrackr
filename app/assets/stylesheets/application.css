@@ -59,3 +59,14 @@ a {
      display: none;
   }
 }
+
+#info {
+  flex-direction: row;
+}
+@media (max-width: 640px) 
+{
+  #info
+  {
+      flex-direction: column;
+  }
+}
