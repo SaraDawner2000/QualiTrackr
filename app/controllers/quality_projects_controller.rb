@@ -51,17 +51,20 @@ class QualityProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @quality_project.update(quality_project_params)
-        if @quality_project.record_approval
-          @quality_project.customer_approval = "ready"
-          @quality_project.save
-        end
-
+        set_customer_approval @quality_project
         format.html { redirect_to quality_project_url(@quality_project), notice: "Quality project was successfully updated." }
         format.json { render :show, status: :ok, location: @quality_project }
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @quality_project.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  def set_customer_approval(quality_project)
+    if quality_project.record_approval
+      quality_project.customer_approval = "ready"
+      quality_project.save
     end
   end
 
