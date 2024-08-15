@@ -47,3 +47,15 @@ a {
   align-items: center;
   height: 30px; 
 }
+
+#video{
+  display: block;
+}
+
+@media (max-width: 1000px) 
+{
+  #video
+  {
+     display: none;
+  }
+}
