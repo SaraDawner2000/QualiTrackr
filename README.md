@@ -14,34 +14,26 @@ QualiTrackr consolidates all components of a PPAP record in one place and tracks
 
 [![Bootstrap 5.3.3][Bootstrap-shield]][Bootstrap-url]
 
-*everything below needs to be completed*
-*refactoring is required before continuing*
 ## Getting Started
+To setup:
+1. fork repo
+2. clone locally
+3. run `bundle install`
 
 ### Prerequisites
+1. ruby 3.3.4
+2. PostgreSQL 14.12
+3. Google maps API key in the .env file for landing page
 
-### Installation
 
 ## Usage
-* Configuration
+* Database initialization:
 
-* Database creation
+run `rake dev:reset` to setup the database locally with custom sample data.
 
-* Database initialization
+## Entity Relationship Diagram
+![Diagram](/app/assets/images/erd.png)
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-## Roadmap
-
-## Contributing
-
-## License
-
-## Contact
 
 
 
