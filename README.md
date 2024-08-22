@@ -20,6 +20,15 @@ To setup:
 2. clone locally
 3. run `bundle install`
 
+There are 5 seeded accounts for looking around the website:
+1. ndworknstudy@gmail.com -- role: Quality Manager, admin: yes
+2. alice@example.com -- role: Quality Manager, admin: no
+3. bob@example.com -- role: Quality Admin, admin: no
+5. carol@example.com -- role: QC tech, admin: no
+6. dave@example.com -- role: Production manager, admin: no
+
+The password for all of them is "password"
+
 ### Prerequisites
 1. ruby 3.3.4
 2. PostgreSQL 14.12
