@@ -19,6 +19,7 @@ To setup:
 1. fork repo
 2. clone locally
 3. run `bundle install`
+<!-- This isn't enough instruction to get started - running `rails server` throws database errors because the database hasn't been set up -->
 
 There are 5 seeded accounts for looking around the website:
 1. ndworknstudy@gmail.com -- role: Quality Manager, admin: yes
