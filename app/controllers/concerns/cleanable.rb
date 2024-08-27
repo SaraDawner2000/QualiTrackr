@@ -1,3 +1,4 @@
+# Would be good to have a comment clarifying why these are here/go beyond mere model validation stuff
 module Cleanable
   extend ActiveSupport::Concern
 
